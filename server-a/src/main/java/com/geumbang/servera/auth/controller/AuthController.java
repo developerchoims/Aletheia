@@ -14,9 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,18 +27,19 @@ public class AuthController {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
+    @Transactional(readOnly = true)
     @PostMapping("/login")
     public ResponseEntity<?> login(HttpServletResponse response, @RequestBody UserLoginDto user) {
         // 1) Server A에서 User Login정보 확인
-        User storedUser = Optional.of(userRepository.findByUserId(user.getUserId()))
+        User storedUser = userRepository.findByUserId(user.getUserId())
                 .orElseThrow(() -> new EntityNotFoundException(Constants.USER_NOT_FOUND));
 
         // 2) 비밀번호 일치 여부 확인
-        if(!storedUser.getUserPwd().equals(user.getPassword())) {
+        if (!storedUser.getUserPwd().equals(user.getPassword())) {
             throw new BadCredentialsException(Constants.PWD_DIFF);
         }
 
-        try{
+        try {
             // 3) 비밀번호 일치하는 경우, Server B에 및 JWT 발급요청
             TokenResponse tokenResponse = authServiceClient.generateToken(storedUser.getUserId(), storedUser.getRole().toString());
 
@@ -54,7 +54,11 @@ public class AuthController {
 
             // 발급받은 JWT 클라이언트에 반환
             return ResponseEntity.ok(Constants.JWT_SUCCESS);
-        }catch (Exception e){
+        } catch (EntityNotFoundException | BadCredentialsException e){
+            log.error(e.getMessage());
+            throw e;
+        } catch (Exception e){
+            log.error(Constants.JWT_EXCEPTION);
             throw new JwtException(Constants.JWT_EXCEPTION);
         }
     }

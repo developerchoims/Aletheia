@@ -70,8 +70,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 if (rfrIsValid) {
                     // rfr token이 유효할 경우
                     String rfrId = jwtUtil.getIdFromToken(rfrToken);
-                    User user = Optional.of(userRepository.findByUserId(rfrId))
-                            .orElseThrow(() -> new EntityNotFoundException(Constants.USER_NOT_FOUND));
+                    User user = userRepository.findByUserId(rfrId)
+                                                .orElseThrow(() -> new EntityNotFoundException(Constants.USER_NOT_FOUND));
 
                     TokenResponse tokenResponse = authServiceClient.generateToken(user.getUserId(), user.getRole().toString());
                     String newAcsToken = tokenResponse.getAccessToken();

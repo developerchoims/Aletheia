@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.EntityTypeException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -134,17 +135,18 @@ public class OrderServiceImpl implements OrderService {
 
             // id를 통해 주문정보 불러오기
             Pageable pageable = PageRequest.of(page, size);
-            Page<Optional<Order>> orders = orderRepository.findAllByUserId(id, pageable);
+            Page<Order> orders = orderRepository.findAllByUserId(id, pageable);
+
             Page<OrderResponseDto> newOrders = orders.map(order -> OrderResponseDto.builder()
-                                                                    .orderId(order.get().getId())
-                                                                    .orderNumber(order.get().getOrderNumber())
-                                                                    .orderDate(order.get().getOrderDate())
-                                                                    .status(order.get().getStatus())
-                                                                    .statusChk(order.get().getStatusChk())
-                                                                    .addressId(order.get().getAddress().getId())
-                                                                    .address(order.get().getAddress().getAddress())
-                                                                    .addressDetail(order.get().getAddress().getAddressDetail())
-                                                                    .zonecode(order.get().getAddress().getZonecode())
+                                                                    .orderId(order.getId())
+                                                                    .orderNumber(order.getOrderNumber())
+                                                                    .orderDate(order.getOrderDate())
+                                                                    .status(order.getStatus())
+                                                                    .statusChk(order.getStatusChk())
+                                                                    .addressId(order.getAddress().getId())
+                                                                    .address(order.getAddress().getAddress())
+                                                                    .addressDetail(order.getAddress().getAddressDetail())
+                                                                    .zonecode(order.getAddress().getZonecode())
                                                                     .build()
                                                                 );
             // 주문정보 반환

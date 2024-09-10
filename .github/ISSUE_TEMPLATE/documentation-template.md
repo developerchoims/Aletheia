@@ -2,7 +2,7 @@
 name: documentation template
 about: documentation template
 title: "[DOCUMENTATION]"
-labels: documentation
+labels: documentation, refactor
 assignees: ''
 
 ---

@@ -1,12 +1,14 @@
 spring:
   application:
     name: server-a
+  config:
+    import: "optional:file:secret.env"
 
 
   datasource:
-    url: jdbc:mariadb://localhost:3307/server-a
-    username: root
-    password: 4gkrsus1qks!
+    url: jdbc:mariadb://localhost:${DATA_PORT}/${DATA_NAME}
+    username: ${DATA_USER}
+    password: ${DATA_PWD}
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
@@ -16,14 +18,14 @@ spring:
 grpc:
   client:
     serverb:  # gRPC 서버인 server-b와 통신하기 위한 설정
-      address: 'static://localhost:50051'  # gRPC 서버 주소
+      address: ${GRPC_ADDRESS}  # gRPC 서버 주소
       enable-keep-alive: true  # KeepAlive 활성화
       keep-alive-without-calls: true  # 비활성 연결에서도 KeepAlive를 유지
   server:
-    port: 50052
+    port: ${GRPC_PORT}
 
 server:
-  port: 9999
+  port: ${SERVER_PORT}
 
 
 secretKey: ${SECRET_KEY}

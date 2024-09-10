@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: server-b
+
+server:
+  port: 8888
+
+grpc:
+  server:
+    port: 50051  # gRPC 서버가 실행될 포트
+    enable-keep-alive: true  # KeepAlive 활성화
+    keep-alive-without-calls: true  # 비활성 연결에서도 KeepAlive 유지
+
+
+secretKey: ${SECRET_KEY}

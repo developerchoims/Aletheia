@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.geumbang.servera.grpc.auth";
+
+service AuthService {
+  // Token 생성 서비스
+  rpc GenerateToken(LoginRequest) returns (TokenResponse);
+
+  // Access Token 검증 서비스
+  rpc ValidateAcsToken(TokenRequest) returns (ValidateTokenResponse);
+
+  // Refresh Token 검증 서비스
+  rpc ValidateRfrToken(TokenRequest) returns (ValidateTokenResponse);
+}
+
+message LoginRequest {
+  string userId = 1;
+  string role = 2;
+}
+
+message TokenRequest {
+  string accessToken = 1;
+  string refreshToken = 2;
+}
+
+message TokenResponse {
+  string accessToken = 1;
+  string refreshToken = 2;
+}
+
+message ValidateTokenResponse {
+  bool isValid = 1;
+  string userId = 2;
+  string role = 3;
+}

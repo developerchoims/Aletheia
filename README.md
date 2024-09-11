@@ -30,6 +30,7 @@
   <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=SpringSecurity-&logoColor=white">
   <img src="https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA-&logoColor=white">
   <img src="https://img.shields.io/badge/Java-4B4B77?style=for-the-badge&logo=Java-&logoColor=white">
+  <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB-&logoColor=white">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub-&logoColor=white">
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white">
   <img src="https://img.shields.io/badge/GRPC-40AEF0?style=for-the-badge&logo=GRPC&logoColor=white">
@@ -37,6 +38,9 @@
 
 <br/><br/><br/><br/>
 # DB Diagram을 활용한 데이터 모델링 :card_index_dividers:
+<iframe width="560" height="315" src='https://dbdiagram.io/e/66e11838550cd927ead50df1/66e11841550cd927ead50eb6'> </iframe>
+![image](https://github.com/user-attachments/assets/ff7e8bde-f75f-4e8a-ae14-ba9631aaf7e6)
+
 <br/><br/><br/><br/>
 # API 스펙이 담긴 Swagger :pencil:
 ### server-a

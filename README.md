@@ -5,7 +5,7 @@
 - server-a, server-b에서 login과 JWT Token 인증 관련 로직이 복합적으로 일어납니다.
 - server-a에 존재하는 JWT Filter가 로그인(스웨거 관련 request 포함)을 제외한 모든 API Request가 있을 때마다 server-b에 JWT Token 인증을 요청합니다.
 - server-b는 server-a에서 받은 데이터를 바탕으로 JWT Token을 발급하거나 유효성을 검사합니다.
-<br/><br/>
+<br/><br/><br/><br/>
 # Quick Start :runner:
 ### 프로젝트 흐름 (실행 과정 - 클릭 시 관련 postman주소로 넘어갑니다.)
 
@@ -18,15 +18,15 @@
 4. [주문 (주문, 주문상태 변경, 주문 목록 조회 테스트 가능, 데이터 입력 방식은 해당 페이지에서 확인 가능합니다.)](https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-f5c4092b-b055-4abc-9966-32f0f134f7ea)
    
 5. [GRPC (토큰 유효성 검사, 토큰 발급 확인 테스트 가능합니다.)](https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/66dfdfed87e11a120becd07b)
-<br/><br/>
+<br/><br/><br/><br/>
 # DB Diagram을 활용한 데이터 모델링 :card_index_dividers:
-<br/><br/>
+<br/><br/><br/><br/>
 # API 스펙이 담긴 Swagger :pencil:
 ### server-a
 - http://localhost:9999/swagger-ui/index.html
 ### server-b
 - http://localhost:8888/swagger-ui/index.html#/
-<br/><br/>
+<br/><br/><br/><br/>
 # API 호출이 가능한 Postman링크 :computer:
 ## 로그인
 - https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-7925a5c2-82df-4ee1-9b3d-0bf808b2d2e6

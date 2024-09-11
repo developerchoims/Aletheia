@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u.id FROM User u  WHERE u.userId = :userId")
     UUID findIdByUserId(String userId);
 
-    @Query("SELECT u.orders FROM User u WHERE u.userId = :userId")
+    @Query(value = "SELECT * FROM orders o WHERE :userId IS NULL OR o.user_id = :userId", nativeQuery = true)
     Page<Order> findAllOrdersByUserId(String userId, Pageable pageable);
+
 }

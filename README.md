@@ -13,7 +13,7 @@
 (secret.env 존재 위치)
 ![image](https://github.com/user-attachments/assets/84c57611-d649-454c-b01f-023d591d98b8)
 
-2. .sql파일을 이용해 server-a에 DB를 구축합니다.-> 글자가 깨지지 않도록 언어 설정에 신경써 주세요. (server-b DB는 사용하지 않기 때문에 없습니다.)
+2. .sql파일을 이용해 server-a에 DB를 구축합니다.-> 글자가 깨지지 않도록 언어 설정에 신경써 주세요.스키마:server-a (server-b DB는 사용하지 않기 때문에 없습니다.)
 
 3. server-a, server-b 모두 run 상태로 만들어주세요.
 

@@ -25,6 +25,10 @@
 
 
 # API 스펙이 담긴 Swagger :pencil:
+### server-a
+- http://localhost:9999/swagger-ui/index.html
+### server-b
+- http://localhost:8888/swagger-ui/index.html#/
 
 
 

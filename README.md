@@ -90,7 +90,7 @@
 , "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoi7ZqM7JuQIiwidXNlcklkIjoibXMxMjMiLCJpYXQiOjE3MjU5NDkxNDQsImV4cCI6MTcyNjU1Mzk0NH0.XaOn--AYc1yxfsE61BW7eGP1HruvjeJMOv3KP88TgzI"}
 ```
 테스트 중점
-- 확인하실 시에는 이미 만료되었을 가능성이 크므로 login test 이후 생성된 token 검사를 하시는 편을 권장드립니다.
+- login test 이후 생성된 token 검사를 하시는 편을 권장드립니다.
 
 ### generateToken test
 요청 주소

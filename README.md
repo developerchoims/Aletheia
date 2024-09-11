@@ -38,7 +38,7 @@
 - 로그인 실패 시 - JWT Token이 생성되지 않습니다.
 - 로그인 성공 시 - JWT Token이 생성됩니다. ( Access Token - Header, Refresh Token - Cookie)
 ### 요청 주소
-- http://localhost:9999/api/login
+- http://localhost:{env}/api/login
 - 예시 RequestBody
 ```
 {"userId" : "ms123",
@@ -56,7 +56,7 @@
 
 ### ValidateAcsToken_ValidateRfrToken test
 요청 주소
-- localhost:50051
+- localhost:{env}
 - 데이터 형식
 ```
 {"accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoi7ZqM7JuQIiwidXNlcklkIjoibXMxMjMiLCJpYXQiOjE3MjU5NDkxNDQsImV4cCI6MTcyNTk1MDA0NH0.dGJ8gbl1CkSFVrZxUjVGiKgmJ5UPoTuOzUuLFPjDc9k"
@@ -67,7 +67,7 @@
 
 ### generateToken test
 요청 주소
-- localhost:50051
+- localhost:{env}
 - 데이터 형식
 ```
 {"userId": "ms123"
@@ -86,7 +86,7 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 
 ### order_post test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 {"userId": "ms123"
@@ -105,7 +105,7 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 
 ### order_put test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 {"orderId": 4
@@ -122,7 +122,7 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 
 ### order_get test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 RequestParam

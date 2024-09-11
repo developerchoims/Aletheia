@@ -45,16 +45,16 @@ public class JwtFilter extends OncePerRequestFilter {
         // 허용할 URI 목록
         List<String> allowedURIs = Arrays.asList(
                 "/api/login",
-                "/api/join",
-                "/swagger-ui/**",
-                "/swagger-resources/**",
-                "/v3/api-docs/**",
-                "/webjars/**",
-                "/swagger-ui.html",
-                "/swagger.json",
-                "/configuration/**",
-                "/v3/api-docs/swagger-config",
-                "/**"
+                "/api/join"
+//                "/swagger-ui/**",
+//                "/swagger-resources/**",
+//                "/v3/api-docs/**",
+//                "/webjars/**",
+//                "/swagger-ui.html",
+//                "/swagger.json",
+//                "/configuration/**",
+//                "/v3/api-docs/swagger-config",
+//                "/**"
         );
 
         // 허용된 URI인지 확인

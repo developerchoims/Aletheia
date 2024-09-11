@@ -20,6 +20,12 @@ public class OrderResponseDto {
     private Order.Status status;
     @Schema(name = "statusChk", description = "판매상태", type="enum")
     private Order.StatusChk statusChk;
+    @Schema(name = "created_at", description = "주문 및 판매 날짜")
+    private LocalDateTime createdAt;
+    @Schema(name = "transactions", description = "판매/구매 여부")
+    private Order.Transactions transactions;
+    @Schema(name = "transactions_number", description = "관련 transactions number")
+    private String transactionsNumber;
     @Schema(name = "id", description = "주소 id")
     private Long addressId;
     @Schema(name = "address", description = "주소지")

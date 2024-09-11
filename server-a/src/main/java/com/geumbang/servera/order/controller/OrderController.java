@@ -3,6 +3,7 @@ package com.geumbang.servera.order.controller;
 import com.geumbang.servera.order.model.OrderChkRequestDto;
 import com.geumbang.servera.order.model.OrderRequestDto;
 import com.geumbang.servera.order.model.OrderResponseDto;
+import com.geumbang.servera.order.model.PurchaseRequestDto;
 import com.geumbang.servera.order.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,16 +24,29 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    // 소비자의 주문 요청
-    @Operation(summary = "order_post", description = "주문 정보를 삽입합니다.")
+    // 유저의 구매 요청
+    @Operation(summary = "order_post", description = "구매 정보를 삽입합니다.")
     @Parameter(name = "userId", description = "유저 아이디")
     @Parameter(name = "addressId", description = "주소 아이디")
+    @Parameter(name = "transactions", description = "구매")
     @Parameter(name = "orderDetail", description = "주문 상세 정보")
     @ApiResponse(responseCode = "200", description = "주문이 완료되었습니다.")
     @Transactional(propagation = Propagation.REQUIRED)
     @PostMapping("/order")
     public ResponseEntity<String> order(@RequestBody OrderRequestDto order) {
         return orderService.order(order);
+    }
+
+    // 유저의 판매 요청
+    @Operation(summary = "purchase_post", description = "판매 정보를 삽입합니다.")
+    @Parameter(name = "userId", description = "유저 아이디")
+    @Parameter(name = "transactions", description = "판매")
+    @Parameter(name = "orderDetail", description = "주문 상세 정보")
+    @ApiResponse(responseCode = "200", description = "주문이 완료되었습니다.")
+    @Transactional(propagation = Propagation.REQUIRED)
+    @PostMapping("/purchase")
+    public ResponseEntity<String> purchase(@RequestBody PurchaseRequestDto purchase) {
+        return orderService.purchase(purchase);
     }
 
     // 판매자가 주문 상태 변경

@@ -3,22 +3,14 @@ package com.geumbang.servera.order.service.serviceImpl;
 import com.geumbang.servera.common.CommonUtil;
 import com.geumbang.servera.common.Constants;
 import com.geumbang.servera.entity.*;
-import com.geumbang.servera.order.model.OrderChkRequestDto;
-import com.geumbang.servera.order.model.OrderDetailRequestDto;
-import com.geumbang.servera.order.model.OrderRequestDto;
-import com.geumbang.servera.order.model.OrderResponseDto;
+import com.geumbang.servera.order.model.*;
 import com.geumbang.servera.order.service.OrderService;
 import com.geumbang.servera.repository.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.EntityTypeException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -53,20 +45,24 @@ public class OrderServiceImpl implements OrderService {
             // addressId로 address 정보 불러오기
             Address address = addressRepository.findByIdAndUser(order.getAddressId(), order.getUserId())
                                                 .orElseThrow(() -> new EntityNotFoundException(Constants.ADDRESS_NOT_FOUND));
-
             // order 정보에 추가하기
             Order newOrder = Order.builder()
                     .orderNumber(commonUtil.createOrderNumber(order.getUserId(), LocalDateTime.now(ZoneId.systemDefault())))
                     .user(user)
                     .address(address)
                     .status(Order.Status.주문완료)
-                    .statusChk(Order.StatusChk.주문완료).build();
-
+                    .statusChk(Order.StatusChk.주문완료)
+                    .transactions(order.getTransactions())
+                    .transactionsNumber(order.getTransactionsNumber())
+                    .build();
             orderRepository.save(newOrder);
             orderDetail(order, newOrder);
+            orderRepository.updateTransactionsNumber(newOrder.getTransactionsNumber(), newOrder.getOrderNumber());
+
 
         } catch (EntityNotFoundException | EntityTypeException e) {
 
+            log.error(e.getMessage(), e);
             throw e;
 
         } catch(Exception e){
@@ -111,6 +107,81 @@ public class OrderServiceImpl implements OrderService {
         }
         orderDetailRepository.saveAll(newOrderDetail);
     }
+
+
+    // purchase data insert(order table)
+    @Override
+    public ResponseEntity<String> purchase (PurchaseRequestDto purchase) {
+        try{
+            // userId로 user정보 불러오기
+            User user = userRepository.findByUserId(purchase.getUserId())
+                    .orElseThrow(() -> new EntityNotFoundException(Constants.USER_NOT_FOUND));
+
+            // addressId로 address 정보 불러오기
+            Address address = addressRepository.findByIdAndUser(purchase.getAddressId(), purchase.getUserId())
+                    .orElseThrow(() -> new EntityNotFoundException(Constants.ADDRESS_NOT_FOUND));
+
+            // order 정보에 추가하기
+            Order newOrder = Order.builder()
+                    .orderNumber(commonUtil.createOrderNumber(purchase.getUserId(), LocalDateTime.now(ZoneId.systemDefault())))
+                    .user(user)
+                    .address(address)
+                    .status(Order.Status.주문완료)
+                    .statusChk(Order.StatusChk.주문완료)
+                    .transactions(purchase.getTransactions())
+                    .build();
+            orderRepository.save(newOrder);
+            purchaseDetail(purchase, newOrder);
+
+        } catch (EntityNotFoundException | EntityTypeException e) {
+
+            log.error(e.getMessage(),e);
+            throw e;
+
+        } catch(Exception e){
+
+            log.error(Constants.PURCHASE_FAIL, e);
+            throw new RuntimeException(Constants.PURCHASE_FAIL);
+
+        }
+        return ResponseEntity.ok(Constants.PURCHASE_SUCCESS);
+    }
+
+    //orderDetail data insert(purchase)
+    public void purchaseDetail(PurchaseRequestDto purchase, Order newOrder) {
+        //orderNumber로 order 가져오기
+        Order savedOrder = orderRepository.findIdByOrderNumber(newOrder.getOrderNumber())
+                                            .orElseThrow(()-> new EntityNotFoundException(Constants.ORDER_NOT_FOUND));
+
+        //orderDetail에 저장할 정보 추출
+        List<OrderDetailRequestDto> orderDetail = purchase.getOrderDetail();
+
+        //새롭게 저장될 orderDetail
+        List<OrderDetail> newOrderDetail = new ArrayList<>();
+
+        // for문 돌며 newOrderDetail에 orderDetail data 저장
+        for(OrderDetailRequestDto orderDetailDto : orderDetail) {
+            //quantity가 소수점 2번째 자리까지 처리되는 규칙을 위반할 경우 예외 처리
+            if (orderDetailDto.getQuantity().scale() > 2) {
+                throw new EntityNotFoundException(Constants.QUANTITY_ERROR);
+            }
+
+            // itemId로 item 정보 불러오기
+            Item item = itemRepository.findById(orderDetailDto.getItemId())
+                                        .orElseThrow(()-> new EntityNotFoundException(Constants.ITEM_NOT_FOUND));
+
+            OrderDetail orderDetailForSave = OrderDetail.builder()
+                                                        .order(savedOrder)
+                                                        .item(item)
+                                                        .quantity(orderDetailDto.getQuantity())
+                                                        .totalPrice(orderDetailDto.getTotalPrice())
+                                                        .build();
+            newOrderDetail.add(orderDetailForSave);
+        }
+        orderDetailRepository.saveAll(newOrderDetail);
+    }
+
+
 
     // 관리자가 order data update (status 정보 update)
     @Override

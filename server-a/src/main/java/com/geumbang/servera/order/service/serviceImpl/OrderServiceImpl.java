@@ -9,6 +9,10 @@ import com.geumbang.servera.order.model.OrderRequestDto;
 import com.geumbang.servera.order.model.OrderResponseDto;
 import com.geumbang.servera.order.service.OrderService;
 import com.geumbang.servera.repository.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +23,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -40,7 +43,6 @@ public class OrderServiceImpl implements OrderService {
     private final CommonUtil commonUtil;
 
     //order data insert
-    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public ResponseEntity<String> order(OrderRequestDto order) {
         try {
@@ -111,13 +113,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     // 관리자가 order data update (status 정보 update)
-    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public ResponseEntity<String> orderChk(OrderChkRequestDto order) {
         // order정보 수정하기
         try{
             orderRepository.updateStatusesById(order.getOrderId(), order.getStatus(), order.getStatusChk());
-            return ResponseEntity.ok("주문 상태 변경을 완료하였습니다.");
+            return ResponseEntity.ok(Constants.ORDER_UPDATE_SUCCESS);
         } catch (Exception e) {
             log.error(Constants.ORDER_UPDATE_FAIL, e);
             throw new RuntimeException(Constants.ORDER_UPDATE_FAIL);
@@ -130,12 +131,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, int page, int size) {
         try {
-            // user의 Id 가져오기
-            UUID id = userRepository.findIdByUserId(userId);
-
             // id를 통해 주문정보 불러오기
             Pageable pageable = PageRequest.of(page, size);
-            Page<Order> orders = orderRepository.findAllByUserId(id, pageable);
+            Page<Order> orders = userRepository.findAllOrdersByUserId(userId, pageable);
 
             Page<OrderResponseDto> newOrders = orders.map(order -> OrderResponseDto.builder()
                                                                     .orderId(order.getId())

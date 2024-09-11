@@ -43,7 +43,8 @@
 <br/><br/><br/><br/>
 # DB Diagram을 활용한 데이터 모델링 :card_index_dividers:
 - https://dbdiagram.io/d/66e11838550cd927ead50df1
-  ![image](https://github.com/user-attachments/assets/2f090443-eeac-4258-8a67-23616101affa)
+ ![image](https://github.com/user-attachments/assets/cf31c2cd-a2f5-4a40-94db-819d75588d6a)
+
 
 
 

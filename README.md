@@ -1,3 +1,11 @@
+# 프로젝트 구조 간단 요약
+
+- alatheia 폴더 하위에 server-a(grpc client)폴더와 server-b(grpc server)폴더가 있습니다.
+- server-a에서는 주문이 이루어집니다.(order관련 crud)
+- server-a, server-b에서 login과 JWT Token 인증 관련 로직이 복합적으로 일어납니다.
+- server-a에 존재하는 JWT Filter가 로그인을 제외한 모든 API Request마다 server-b에 JWT Token 인증을 요청합니다.
+- server-b는 server-a에서 받은 데이터를 바탕으로 JWT Token을 발급하거나 유효성을 검사합니다.
+
 # Quick Start :runner:
 ### 프로젝트 흐름 (실행 과정 - 클릭 시 관련 postman주소로 넘어갑니다.)
 

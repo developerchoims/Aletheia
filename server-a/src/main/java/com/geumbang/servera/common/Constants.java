@@ -6,11 +6,13 @@ public class Constants {
     public static final String ADDRESS_NOT_FOUND = "주소를 찾을 수 없습니다.";
     public static final String ORDER_NOT_FOUND = "주문 정보를 찾을 수 없습니다.";
     public static final String ITEM_NOT_FOUND = "상품 정보를 찾을 수 없습니다.";
-    public static final String ORDER_SUCCESS = "주문이 완료되었습니다.";
-    public static final String ORDER_FAIL = "주문이 비정상적으로 종료되었습니다.";
+    public static final String ORDER_SUCCESS = "구매요청이 완료되었습니다.";
+    public static final String ORDER_FAIL = "구매요청이 비정상적으로 종료되었습니다.";
     public static final String QUANTITY_ERROR = "양은 소수점 2자리까지만 입력 가능합니다";
     public static final String ORDER_UPDATE_SUCCESS = "주문 상태 변경을 완료하였습니다.";
     public static final String ORDER_UPDATE_FAIL = "주문 상태 수정에 실패했습니다.";
+    public static final String PURCHASE_SUCCESS = "판매요청이 완료되었습니다.";
+    public static final String PURCHASE_FAIL = "판매요청이 비정상적으로 종료되었습니다.";
     public static final String PWD_DIFF = "비밀번호가 일치하지 않습니다.";
     public static String JWT_EXPIRED = "JWT토큰이 만료되었습니다.";
     public static String JWT_SUBJECT_DIFF = "JWT토큰이 해당 아이디의 것이 아닙니다.";

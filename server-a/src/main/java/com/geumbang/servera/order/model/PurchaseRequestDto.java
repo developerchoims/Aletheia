@@ -6,18 +6,15 @@ import lombok.Data;
 
 import java.util.List;
 
-// 사용자가 물건 구매시 사용될 DTO
 @Data
-public class OrderRequestDto {
+public class PurchaseRequestDto {
     @Schema(name = "userId", description = "user id")
     private String userId;
-    @Schema(name = "id", description = "주소 id")
+    @Schema(name = "id", description = "�ּ� id")
     private Long addressId;
-    @Schema(name = "transactions", description = "구매")
+    @Schema(name = "transactions", description = "�Ǹ�")
     private Order.Transactions transactions;
-    @Schema(name = "transactionsNumber", description = "구매할 판매주문 번호")
-    private String transactionsNumber;
 
-    @Schema(name = "id", description = "주문 상세 id")
+    @Schema(name = "orderDetail", description = "�ֹ� �� id")
     private List<OrderDetailRequestDto> orderDetail;
 }

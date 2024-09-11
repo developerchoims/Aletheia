@@ -24,11 +24,11 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(
-                        "/swagger-ui/**",
-                        "/v3/api-docs/**",
-                        "/swagger-resources/**",
-                        "/webjars/**",
-                        "/swagger-ui.html",
+//                        "/swagger-ui/**",
+//                        "/v3/api-docs/**",
+//                        "/swagger-resources/**",
+//                        "/webjars/**",
+//                        "/swagger-ui.html",
                         "/api/login",
                         "/api/join"
                 ).permitAll()

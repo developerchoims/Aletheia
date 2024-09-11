@@ -51,6 +51,15 @@ public class Order {
     @Schema(name = "statusChk", description = "판매상태", type="enum")
     private StatusChk statusChk;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transactions", nullable = false)
+    @Schema(name = "transactions", description = "판매/구매 여부", type = "enum")
+    private Transactions transactions;
+
+    @Column(name = "transactions_number")
+    @Schema(name = "transactionsNumber", description = "관련 transactionsNumber")
+    private String transactionsNumber;
+
     @ColumnDefault("current_timestamp()")
     @Column(name = "created_at")
     @Schema(name = "createdAt", description = "생성 시간", defaultValue = "현재 시간")
@@ -66,12 +75,15 @@ public class Order {
     private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
 
     @Builder
-    public Order(String orderNumber, User user, Address address, Status status, StatusChk statusChk) {
+    public Order(String orderNumber, User user, Address address, Status status
+                , StatusChk statusChk, Transactions transactions, String transactionsNumber) {
         this.orderNumber = orderNumber;
         this.user = user;
         this.address = address;
         this.status = status;
         this.statusChk = statusChk;
+        this.transactions = transactions;
+        this.transactionsNumber = transactionsNumber;
     }
 
     public enum Status {
@@ -84,6 +96,11 @@ public class Order {
         주문완료,
         송금완료,
         수령완료
+    }
+
+    public enum Transactions {
+        판매,
+        구매
     }
 
     @PreUpdate

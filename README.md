@@ -30,6 +30,7 @@
 
 # API 호출이 가능한 Postman링크 :computer:
 ## 로그인
+- https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-7925a5c2-82df-4ee1-9b3d-0bf808b2d2e6
 ### 안내 사항
 - {userId, password}의 형태로 body(raw)에 값을 입력하고 바꿀 수 있습니다.
 - 현재 DB에 저장된 값은 테스트용으로 삽입된 {"ms123", "ms123ms123!"} 데이터 하나입니다.
@@ -47,6 +48,7 @@
 존재하지 않는 userId 입력 시, password를 잘못 입력 시 다른 문구가 출력되는지 확인
 
 ## GRPC
+- https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/66dfdfed87e11a120becd07b
 ### 안내 사항
 - login test와 order test 진행하며 자동으로 테스트 되는 검사 목록들입니다.
 - ValidateAcsToken_ValidateRfrToken test : 토큰 유효성 검사 가능
@@ -75,6 +77,7 @@
 server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 때문에 잘못된 userId, role이 입력되지 않는다는 가정하에 테스트를 진행합니다.
 
 ## 주문
+- https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-f5c4092b-b055-4abc-9966-32f0f134f7ea
 ### 안내 사항
 - order_post test : user가 물건을 주문할 경우 사용되는 api test
 - order_put test : admin이 주문 상태 및 판매 상태를 변경할 경우 사용되는 api test

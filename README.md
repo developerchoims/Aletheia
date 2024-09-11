@@ -116,12 +116,14 @@ api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준�
 요청 주소
 - http://localhost:9999/api/order
 데이터 형식
+```
 { "userId": "ms123"
 , "addressId": 1
 , "transactions": "구매"
 , "transactionsNumber": "ms123-2409191340"
 , "orderDetail": [{ "itemId": 1, "totalPrice": 100000, "quantity": 100 }]
 }
+```
 테스트 중점
 - 존재하지 않는 userId 입력
 - 존재하지 않는 addressId 입력(1까지만 존재합니다.)
@@ -135,10 +137,12 @@ api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준�
 요청 주소
 - http://localhost:9999/api/order
 데이터 형식
+```
 {    "orderId": 33
 ,    "orderNumber": "ms123-2409195941"
 ,    "status": "입금완료"
-,    "statusChk": "송금완료"}  
+,    "statusChk": "송금완료"}
+```
 테스트 중점
 - 존재하지 않는 orderId 입력
 - 잘못된 형식의 status 입력
@@ -152,8 +156,10 @@ api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준�
 요청 주소
 - http://localhost:9999/api/order
 데이터 형식
+```
 RequestParam
 [{"key":"userId","value":"ms123"},{"key":"search","value":"ms123"},{"key":"transactions","value":"구매"},{"key":"page","value":"0"},{"key":"size","value":"3"}]
+```
 테스트 중점
 - 존재하지 않는 userId 입력
 - page와 size의 값을 변화시키기

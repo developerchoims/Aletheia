@@ -34,4 +34,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<String> handleNullPointerException(NullPointerException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }

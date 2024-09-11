@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.EntityTypeException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -201,11 +202,27 @@ public class OrderServiceImpl implements OrderService {
     // 관리자 - userId : 검색 input value 값 - /api/admin/order (get) 에서 사용
     // 유 저 - userId : 유저 본인의 id - /api/order (get) 에서 사용
     @Override
-    public ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, int page, int size) {
+    public ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, String search, Order.Transactions transactions, int page, int size) {
         try {
             // id를 통해 주문정보 불러오기
             Pageable pageable = PageRequest.of(page, size);
-            Page<Order> orders = userRepository.findAllOrdersByUserId(userId, pageable);
+            Page<Order> orders;
+            // transactions(구매/판매)에 따라 다른 쿼리 실행 시킴
+            if(transactions == Order.Transactions.판매) {
+                if(search == null || search.isEmpty()){
+                    //검색하려는 id가 없고 판매 정보를 열람할 때
+                    orders = orderRepository.findAllOrders(transactions, pageable);
+                } else {
+                    //검색하려는 id가 있고 판매 정보를 열람할 때
+                    orders = orderRepository.findAllOrdersBySearchAndTransactions(search, transactions, pageable);
+                }
+            } else {
+                //검색하려는 id 유무에 상관 없이 구매 정보는 본인만 열람 가능
+                if(userId == null || userId.isEmpty()){
+                    throw new NullPointerException(Constants.USER_NOT_FOUND);
+                }
+                orders = orderRepository.findAllOrdersByUserIdAndTransactions(userId, transactions, pageable);
+            }
 
             Page<OrderResponseDto> newOrders = orders.map(order -> OrderResponseDto.builder()
                                                                     .orderId(order.getId())
@@ -213,6 +230,9 @@ public class OrderServiceImpl implements OrderService {
                                                                     .orderDate(order.getOrderDate())
                                                                     .status(order.getStatus())
                                                                     .statusChk(order.getStatusChk())
+                                                                    .createdAt(order.getCreatedAt())
+                                                                    .transactions(order.getTransactions())
+                                                                    .transactionsNumber(order.getTransactionsNumber())
                                                                     .addressId(order.getAddress().getId())
                                                                     .address(order.getAddress().getAddress())
                                                                     .addressDetail(order.getAddress().getAddressDetail())
@@ -222,6 +242,9 @@ public class OrderServiceImpl implements OrderService {
             // 주문정보 반환
             return ResponseEntity.ok(newOrders);
 
+        } catch(NullPointerException e){
+            log.error(e.getMessage(), e);
+            throw e;
         } catch (Exception e){
             log.error(Constants.ORDER_EXCEPTION, e);
             throw new RuntimeException(Constants.ORDER_EXCEPTION);

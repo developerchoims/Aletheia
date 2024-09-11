@@ -34,4 +34,14 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("UPDATE Order o SET o.transactionsNumber = :orderNumber WHERE o.orderNumber = :transactionsNumber")
     int updateTransactionsNumber(String transactionsNumber, String orderNumber);
 
+
+    @Query("SELECT o FROM Order o WHERE o.user.userId = :search AND o.transactions = :transactions AND o.transactionsNumber IS NULL")
+    Page<Order> findAllOrdersBySearchAndTransactions(String search, Order.Transactions transactions, Pageable pageable);
+
+    @Query("SELECT o FROM Order o WHERE o.transactions = :transactions AND o.transactionsNumber IS NULL")
+    Page<Order> findAllOrders(Order.Transactions transactions, Pageable pageable);
+
+    @Query("SELECT o FROM Order o WHERE o.transactions = :transactions AND o.user.userId = :userId")
+    Page<Order> findAllOrdersByUserIdAndTransactions(String userId, Order.Transactions transactions, Pageable pageable);
+
 }

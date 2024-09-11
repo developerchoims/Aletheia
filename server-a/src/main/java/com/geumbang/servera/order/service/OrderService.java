@@ -1,5 +1,6 @@
 package com.geumbang.servera.order.service;
 
+import com.geumbang.servera.entity.Order;
 import com.geumbang.servera.order.model.OrderChkRequestDto;
 import com.geumbang.servera.order.model.OrderRequestDto;
 import com.geumbang.servera.order.model.OrderResponseDto;
@@ -13,7 +14,7 @@ public interface OrderService {
 
     ResponseEntity<String> orderChk(OrderChkRequestDto order);
 
-    ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, int page, int size);
+    ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, String search, Order.Transactions transactions, int page, int size);
 
     ResponseEntity<String> purchase(PurchaseRequestDto purchase);
 }

@@ -1,5 +1,6 @@
 package com.geumbang.servera.order.controller;
 
+import com.geumbang.servera.entity.Order;
 import com.geumbang.servera.order.model.OrderChkRequestDto;
 import com.geumbang.servera.order.model.OrderRequestDto;
 import com.geumbang.servera.order.model.OrderResponseDto;
@@ -69,8 +70,10 @@ public class OrderController {
     @ApiResponse(responseCode = "200", description = "Page<Order>")
     @GetMapping("/order")
     public ResponseEntity<Page<OrderResponseDto>> getOrder(@RequestParam String userId,
+                                                           @RequestParam Order.Transactions transactions,
+                                                           @RequestParam String search,
                                                            @RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "10") int size) {
-        return orderService.orderSelect(userId, page, size);
+        return orderService.orderSelect(userId, search, transactions, page, size);
     }
 }

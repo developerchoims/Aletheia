@@ -18,9 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -36,7 +39,29 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 로그인이나 회원가입 경로는 JWT 검증을 건너뛰기
         String requestURI = request.getRequestURI();
-        if (requestURI.equals("/api/login") || requestURI.equals("/api/join")) {
+        // AntPathMatcher 객체 생성
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+
+        // 허용할 URI 목록
+        List<String> allowedURIs = Arrays.asList(
+                "/api/login",
+                "/api/join",
+                "/swagger-ui/**",
+                "/swagger-resources/**",
+                "/v3/api-docs/**",
+                "/webjars/**",
+                "/swagger-ui.html",
+                "/swagger.json",
+                "/configuration/**",
+                "/v3/api-docs/swagger-config",
+                "/**"
+        );
+
+        // 허용된 URI인지 확인
+        boolean isAllowedURI = allowedURIs.stream()
+                .anyMatch(allowedURI -> pathMatcher.match(allowedURI, requestURI));
+
+        if (isAllowedURI) {
             filterChain.doFilter(request, response);
             return;
         }

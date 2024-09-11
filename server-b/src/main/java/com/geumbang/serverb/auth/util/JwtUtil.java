@@ -53,8 +53,6 @@ public class JwtUtil {
 
     // 유효성 검사
     public boolean isValidToken(String token) {
-        log.info("토큰 확인중");
-        log.info("token: {}", token);
         try {
             // 토큰 클레임 검사
             Claims claims = Jwts

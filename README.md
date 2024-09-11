@@ -25,13 +25,13 @@
 ### postman과 관련된 자세한 사항은 맨 마지막 단락에 존재합니다. 해당 단락을 참고해주세요.
 
 <div align='center'>
-  <img src="https://img.shields.io/badge/IntelliJ-#000000?style=for-the-badge&logo=IntelliJ-&logoColor=white">
-  <img src="https://img.shields.io/badge/SpringBoot-#6DB33F?style=for-the-badge&logo=SpringBoot-&logoColor=white">
-  <img src="https://img.shields.io/badge/SpringSecurity-#6DB33F?style=for-the-badge&logo=SpringSecurity-&logoColor=white">
-  <img src="https://img.shields.io/badge/Java-#4B4B77?style=for-the-badge&logo=Java-&logoColor=white">
-  <img src="https://img.shields.io/badge/GitHub-#181717?style=for-the-badge&logo=GitHub-&logoColor=white">
-  <img src="https://img.shields.io/badge/Postman#FF6C37?style=for-the-badge&logo=Postman&logoColor=white">
-  <img src="https://img.shields.io/badge/GRPC#40AEF0?style=for-the-badge&logo=GRPC&logoColor=white">
+  <img src="https://img.shields.io/badge/IntelliJ-000000?style=for-the-badge&logo=IntelliJ-&logoColor=white">
+  <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot-&logoColor=white">
+  <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=SpringSecurity-&logoColor=white">
+  <img src="https://img.shields.io/badge/Java-4B4B77?style=for-the-badge&logo=Java-&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub-&logoColor=white">
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white">
+  <img src="https://img.shields.io/badge/GRPC-40AEF0?style=for-the-badge&logo=GRPC&logoColor=white">
 </div>
 
 <br/><br/><br/><br/>

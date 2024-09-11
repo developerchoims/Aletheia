@@ -198,9 +198,9 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    // order list select(관리자, 유저 공통)
-    // 관리자 - userId : 검색 input value 값 - /api/admin/order (get) 에서 사용
-    // 유 저 - userId : 유저 본인의 id - /api/order (get) 에서 사용
+    // order list select
+    // 구매 : 자신의 것만 열람 가능
+    // 판매 : 전체 열람 가능, 아이디 검색 가능
     @Override
     public ResponseEntity<Page<OrderResponseDto>> orderSelect(String userId, String search, Order.Transactions transactions, int page, int size) {
         try {

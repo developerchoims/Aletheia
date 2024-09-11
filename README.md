@@ -21,6 +21,8 @@
 5. [주문 (주문, 주문상태 변경, 주문 목록 조회 테스트 가능, 데이터 입력 방식은 해당 페이지에서 확인 가능합니다.)](https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-f5c4092b-b055-4abc-9966-32f0f134f7ea)
    
 6. [GRPC (토큰 유효성 검사, 토큰 발급 확인 테스트 가능합니다.)](https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/66dfdfed87e11a120becd07b)
+
+### postman과 관련된 자세한 사항은 맨 마지막 단락에 존재합니다. 해당 단락을 참고해주세요.
 <br/><br/><br/><br/>
 # DB Diagram을 활용한 데이터 모델링 :card_index_dividers:
 <br/><br/><br/><br/>

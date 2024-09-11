@@ -183,12 +183,13 @@ public class OrderServiceImpl implements OrderService {
 
 
 
-    // 관리자가 order data update (status 정보 update)
+    // 관리자가 order data update (status, statusChk 정보 update)
     @Override
     public ResponseEntity<String> orderChk(OrderChkRequestDto order) {
         // order정보 수정하기
         try{
             orderRepository.updateStatusesById(order.getOrderId(), order.getStatus(), order.getStatusChk());
+            orderRepository.updateStatusesByOrderNumber(order.getOrderNumber(), order.getStatus(), order.getStatusChk());
             return ResponseEntity.ok(Constants.ORDER_UPDATE_SUCCESS);
         } catch (Exception e) {
             log.error(Constants.ORDER_UPDATE_FAIL, e);

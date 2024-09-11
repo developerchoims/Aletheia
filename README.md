@@ -29,3 +29,52 @@
 
 
 # API 호출이 가능한 Postman링크 :computer:
+## 로그인
+### 안내 사항
+- {userId, password}의 형태로 body(raw)에 값을 입력하고 바꿀 수 있습니다.
+- 현재 DB에 저장된 값은 테스트용으로 삽입된 {"ms123", "ms123ms123!"} 데이터 하나입니다.
+- server-a, server-b 가 모두 run 상태여야 정상 작동합니다.
+- 로그인 실패 시 - JWT Token이 생성되지 않습니다.
+- 로그인 성공 시 - JWT Token이 생성됩니다. ( Access Token - Header, Refresh Token - Cookie)
+### 요청 주소
+- http://localhost:9999/api/login
+- 예시 RequestBody
+```
+{"userId" : "ms123",
+"password" : "ms123ms123!"}!
+```
+### 테스트 중점
+존재하지 않는 userId 입력 시, password를 잘못 입력 시 다른 문구가 출력되는지 확인
+
+## GRPC
+### 안내 사항
+- login test와 order test 진행하며 자동으로 테스트 되는 검사 목록들입니다.
+- ValidateAcsToken_ValidateRfrToken test : 토큰 유효성 검사 가능
+- generateToken test : 토큰 발급 확인 가능
+
+### ValidateAcsToken_ValidateRfrToken test
+요청 주소
+- localhost:50051
+- 데이터 형식
+```
+{"accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoi7ZqM7JuQIiwidXNlcklkIjoibXMxMjMiLCJpYXQiOjE3MjU5NDkxNDQsImV4cCI6MTcyNTk1MDA0NH0.dGJ8gbl1CkSFVrZxUjVGiKgmJ5UPoTuOzUuLFPjDc9k"
+, "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoi7ZqM7JuQIiwidXNlcklkIjoibXMxMjMiLCJpYXQiOjE3MjU5NDkxNDQsImV4cCI6MTcyNjU1Mzk0NH0.XaOn--AYc1yxfsE61BW7eGP1HruvjeJMOv3KP88TgzI"}
+```
+테스트 중점
+- 확인하실 시에는 이미 만료되었을 가능성이 크므로 login test 이후 생성된 token 검사를 하시는 편을 권장드립니다.
+
+### generateToken test
+요청 주소
+- localhost:50051
+- 데이터 형식
+```
+{"userId": "ms123"
+, "role": "회원"}
+```
+- 테스트 중점
+server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 때문에 잘못된 userId, role이 입력되지 않는다는 가정하에 테스트를 진행합니다.
+
+
+
+
+

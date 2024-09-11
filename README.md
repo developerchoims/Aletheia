@@ -38,8 +38,7 @@
 
 <br/><br/><br/><br/>
 # DB Diagram을 활용한 데이터 모델링 :card_index_dividers:
-<iframe width="560" height="315" src='https://dbdiagram.io/e/66e11838550cd927ead50df1/66e11841550cd927ead50eb6'> </iframe>
-![image](https://github.com/user-attachments/assets/ff7e8bde-f75f-4e8a-ae14-ba9631aaf7e6)
+- <iframe width="560" height="315" src='https://dbdiagram.io/e/66e11838550cd927ead50df1/66e11841550cd927ead50eb6'> </iframe>
 
 <br/><br/><br/><br/>
 # API 스펙이 담긴 Swagger :pencil:

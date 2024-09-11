@@ -9,6 +9,8 @@ import lombok.Data;
 public class OrderChkRequestDto {
     @Schema(name = "id", description = "주문 id")
     private Long orderId;
+    @Schema(name = "orderNumber", description = "주문 번호")
+    private String orderNumber;
     @Schema(name = "status", description = "주문상태", type="enum")
     private Order.Status status;
     @Column(name = "status_chk", nullable = false)

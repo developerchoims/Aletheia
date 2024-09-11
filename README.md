@@ -9,8 +9,7 @@
 # Quick Start :runner:
 ### 프로젝트 흐름 (실행 과정 - 클릭 시 관련 postman주소로 넘어갑니다.)
 
-1. secret.env를 서버에 알맞게 적용해주세요.(server-b에 server-a의 secret.env가 적용되지 않도록 해주세요. 모두 /src/main/하위에 존재해야 합니다.)
-![image](https://github.com/user-attachments/assets/84c57611-d649-454c-b01f-023d591d98b8)
+1. secret.env를 서버에 알맞게 적용해주세요.(server-b에 server-a의 secret.env가 적용되지 않도록 해주세요. 모두 /src/main/하위에 존재해야 합니다.)<br/>
 ![image](https://github.com/user-attachments/assets/84c57611-d649-454c-b01f-023d591d98b8)
 
 

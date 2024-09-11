@@ -115,7 +115,7 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준수하기 위하여 요청주소는 같되 get, post 등을 달리하여 mapping하였습니다.
 ### order_post test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 { "userId": "ms123"
@@ -136,7 +136,7 @@ api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준�
 
 ### order_put test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 {    "orderId": 33
@@ -155,7 +155,7 @@ api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준�
 
 ### order_get test
 요청 주소
-- http://localhost:9999/api/order
+- http://localhost:{env}/api/order
 데이터 형식
 ```
 RequestParam

@@ -23,8 +23,11 @@
    
 6. [GRPC (토큰 유효성 검사, 토큰 발급 확인 테스트 가능합니다.)](https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/66dfdfed87e11a120becd07b)
 
+7. swagger를 확인하기 위해서는 SecurityConfig와 JwtFilter의 url 주석을 해제해주세요.
+
 ### postman과 관련된 자세한 사항은 맨 마지막 단락에 존재합니다. 해당 단락을 참고해주세요.<br/><br/><br/><br/>
 
+# 사용 기술
 <div align='center'>
   <img src="https://img.shields.io/badge/IntelliJ-000000?style=for-the-badge&logo=IntelliJ-&logoColor=white">
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot-&logoColor=white">
@@ -102,21 +105,23 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 ## 주문
 - https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-f5c4092b-b055-4abc-9966-32f0f134f7ea
 ### 안내 사항
-- order_post test : user가 물건을 주문할 경우 사용되는 api test
+- 주문과 관련된 api를 test할 수 있는 collection입니다.
+- order_post test : user가 물건을 구매할 경우 사용되는 api test
 - order_put test : admin이 주문 상태 및 판매 상태를 변경할 경우 사용되는 api test
-- order_get test : user가 자신의 주문 목록을 불러올 경우 사용, admin이 특정 사용자의 주문 목록을 불러올 경우 사용되는 api test
-- api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준수하기 위하여 요청주소는 같되 get, post 등을 달리하여 mapping하였습니다.
+- order_get test : user가 구매/판매 목록을 불러옴, 구매-자신 것만 열람 가능, 판매 - 모두 가능(아직 판매되지 않은 선에서)
+- purchase_post test : 판매 요청 테스트
 
+api가 많지 않기 때문에 요청 주소는 restfult API 의 원칙을 준수하기 위하여 요청주소는 같되 get, post 등을 달리하여 mapping하였습니다.
 ### order_post test
 요청 주소
-- http://localhost:{env}/api/order
+- http://localhost:9999/api/order
 데이터 형식
-```
-{"userId": "ms123"
+{ "userId": "ms123"
 , "addressId": 1
-, "orderDetail": [{ "itemId": 2, "totalPrice": 100000, "quantity": 4}]
+, "transactions": "구매"
+, "transactionsNumber": "ms123-2409191340"
+, "orderDetail": [{ "itemId": 1, "totalPrice": 100000, "quantity": 100 }]
 }
-```
 테스트 중점
 - 존재하지 않는 userId 입력
 - 존재하지 않는 addressId 입력(1까지만 존재합니다.)
@@ -128,13 +133,12 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 
 ### order_put test
 요청 주소
-- http://localhost:{env}/api/order
+- http://localhost:9999/api/order
 데이터 형식
-```
-{"orderId": 4
-, "status": "입금완료"
-, "statusChk": "송금완료"}
-```
+{    "orderId": 33
+,    "orderNumber": "ms123-2409195941"
+,    "status": "입금완료"
+,    "statusChk": "송금완료"}  
 테스트 중점
 - 존재하지 않는 orderId 입력
 - 잘못된 형식의 status 입력
@@ -142,22 +146,17 @@ server-a에서 로그인 검사를 마치고 넘긴 데이터를 입력하기 �
 
 주의 사항
 - status, statusChk는 Enum type이므로 띄어쓰기가 추가되어도 데이터가 저장되지 않습니다.
+- orderNumber가 반드시 들어가도록 했기 때문에 이를 비워놓으면 안 됩니다.
 
 ### order_get test
 요청 주소
-- http://localhost:{env}/api/order
+- http://localhost:9999/api/order
 데이터 형식
-```
 RequestParam
-[{"key":"userId","value":"ms123"}
-,{"key":"page","value":"0"}
-,{"key":"size","value":"3"}]
-```
+[{"key":"userId","value":"ms123"},{"key":"search","value":"ms123"},{"key":"transactions","value":"구매"},{"key":"page","value":"0"},{"key":"size","value":"3"}]
 테스트 중점
 - 존재하지 않는 userId 입력
-- page와 size의 값을 변화시켜 확인
-
-
+- page와 size의 값을 변화시키기
 
 
 

@@ -48,9 +48,5 @@
 ## 주문
 - https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-f5c4092b-b055-4abc-9966-32f0f134f7ea
 
-테스트 중점
-- 존재하지 않는 userId 입력
-- page와 size의 값을 변화시키기
-
 
 

@@ -1,8 +1,9 @@
-# 금 구매, 판매를 지원하는 C2C 사이트의 백엔드 코드입니다.
+> # 금 구매, 판매를 지원하는 C2C 사이트의 백엔드 코드입니다.
 ----------------------------------------------------------
 
 # 프로젝트 구조 간단 요약 :star2:
 
+### 독립적으로 확장 가능한 마이크로서비스 아키텍처에 흥미를 가지고 gRPC를 이용해 구현했습니다.
 - alatheia 폴더 하위에 server-a(grpc client)폴더와 server-b(grpc server)폴더가 있습니다.
 - server-a에서는 주문이 이루어집니다.(order관련 crud)
 - server-a, server-b에서 login과 JWT Token 인증 관련 로직이 복합적으로 일어납니다.
@@ -58,6 +59,7 @@
 ### server-b
 - http://localhost:8888/swagger-ui/index.html#/
 <br/><br/><br/><br/>
+
 # API 호출이 가능한 Postman링크 :computer:
 ## 로그인
 - https://web.postman.co/workspace/GeumBang~af1d07bc-b5a2-4f93-a1ac-339f472734ae/collection/37825355-7925a5c2-82df-4ee1-9b3d-0bf808b2d2e6
